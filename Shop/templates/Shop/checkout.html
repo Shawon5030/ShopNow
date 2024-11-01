@@ -1,0 +1,93 @@
+{% extends 'Shop/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-6">
+            <h4>Order Summary</h4>
+            <hr>
+            {% for i in carts%}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5>Product: {{i.product.title}}</h5>
+                    <p>Quantity: {{i.quantity}}</p>
+                    <p class="fw-bold">Price: {{i.product.discounted_price}}</p>
+                    <p class="fw-bold">Price for total quantaty: {{i.total_price}}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+            <div class="container my-4">
+                <div class="card border-danger">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-danger">Total Price</h5>
+                        <p class="fw-bold text-center" style="font-size: 1.25rem;">
+                            Price for Total Quantity: <span class="text-primary">${{ total }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+           
+            
+        </div>
+        <div class="col-sm-4 offset-sm-1">
+            <h4>Select Shipping Address</h4>
+            <hr>
+            <form action="/payment" >
+                {% if c %}
+                {% for c in c %}
+                <div class="container my-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">{{ request.user }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Name:</strong> {{ c.name }}</p>
+                            <p><strong>Division:</strong> {{ c.division }}</p>
+                            <p><strong>District:</strong> {{ c.district }}</p>
+                            <p><strong>Thana:</strong> {{ c.thana }}</p>
+                            <p><strong>Village/Road:</strong> {{ c.villorroad }}</p>
+                            <p><strong>Zip Code:</strong> {{ c.zipcode }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check mt-2 mb-5">
+                    <input class="form-check-input" type="radio" name="address" id="address{{forloop.counter }}"
+                        value="{{ c.id }}">
+                    <label class="form-check-label fw-bold" for="address{{ forloop.counter }}">
+                        Address: {{ forloop.counter }}
+                    </label>
+                </div>
+                {% endfor %}
+
+
+                <div style="display: flex; gap : 1rem">
+
+                    <button type="submit" class="btn btn-warning mt-3 px-3 fw-bold">Continue</button>
+
+
+                    <a href="{% url 'profile' %}" class="btn btn-primary mt-3 px-3 fw-bold">Add New Address</a>
+
+                </div>
+            </form>
+            {%else%}
+
+            <p> You have on Address for order product</p>
+            <div class="text-end">
+                <a href="{% url 'profile' %}" class="btn btn-primary mt-3 px-5 fw-bold">Add Address</a>
+
+            </div>
+
+
+
+
+            {%endif%}
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
