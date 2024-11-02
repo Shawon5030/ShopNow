@@ -1,42 +1,52 @@
 {% extends 'Shop/base.html' %}
 {% load static %}
-{% block title %}Cart{% endblock title %}
+{% block title %}Cart | aiQuest Fashion{% endblock title %}
+
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
         <h1 class="text-center mb-5">Shopping Cart</h1>
-        <div class="col-sm-8">
-            <div class="card">
+        
+        <!-- Cart Items Section -->
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <h3>Cart</h3>
-                        <div class="row" id="image_show_em" style="display:none">
-                            <h3 class="text-center">You have no product in your cart</h3>
-                            <div class="text-center">
-                                <img src="{% static 'Shop/images/emptycart.png' %}" alt="" class="img-fluid img-thumbnail w-25">
-                            </div>
+                    <div class="row" id="image_show_em" style="display:none">
+                        <h3 class="text-center">You have no product in your cart</h3>
+                        <div class="text-center">
+                            <img src="{% static 'Shop/images/emptycart.png' %}" alt="Empty Cart" class="img-fluid img-thumbnail w-25">
                         </div>
+                    </div>
+                    
                     {% for cart in carts %}
                     <hr>
-
-
-                    <div class="row">
-                        <div class="col-sm-3 text-center align-self-center"><img
-                                src="{{cart.product.product_image.url}}" alt="" srcset=""
-                                class="img-fluid img-thumbnail shadow-sm" height="150" width="150"> </div>
+                    <div class="row mb-4">
+                        <div class="col-sm-3 text-center align-self-center">
+                            <img src="{{cart.product.product_image.url}}" alt="{{cart.product.title}}" 
+                                 class="img-fluid img-thumbnail shadow-sm rounded" style="width: 150px; height: 150px;">
+                        </div>
                         <div class="col-sm-9">
                             <div>
-                                <h5>{{cart.product.title}}</h5>
+                                <h5 class="text-primary">{{cart.product.title}}</h5>
                                 <p class="mb-2 text-muted small">{{cart.product.description}}</p>
+                                
+                                <!-- Quantity Controls -->
                                 <div class="my-3">
-                                    <label for="quantity"></label>
-                            
-                                    <a class="minus-cart btn" pid = "{{cart.product.id}}"><i class="fas fa-minus-square fa-lg"></i></a>
-                                    <span id="quantity">{{cart.quantity}}</span>
-                                    <a class="plus-cart btn" pid = "{{cart.product.id}}"><i class="fas fa-plus-square fa-lg"></i></a>
+                                    <a class="minus-cart btn btn-light border shadow-sm me-2" pid="{{cart.product.id}}">
+                                        <i class="fas fa-minus-square fa-lg text-primary"></i>
+                                    </a>
+                                    <span id="quantity" class="fw-bold">{{cart.quantity}}</span>
+                                    <a class="plus-cart btn btn-light border shadow-sm ms-2" pid="{{cart.product.id}}">
+                                        <i class="fas fa-plus-square fa-lg text-primary"></i>
+                                    </a>
                                 </div>
+                                
                                 <div class="d-flex justify-content-between">
-                                    <a  class="remove-cart btn btn-sm btn-info  text-white mr-3" pid = "{{cart.product.id}}">Remove item </a>
-                                    <p class="mb-0"><span><strong>{{cart.product.discounted_price}}</strong></span></p>
+                                    <a class="remove-cart btn btn-sm btn-outline-danger shadow-sm" pid="{{cart.product.id}}">
+                                        Remove item
+                                    </a>
+                                    <p class="mb-0"><strong class="text-success">Tk. {{cart.product.discounted_price}}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -45,31 +55,96 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-sm-4 ">
-            <div class="card off_cart">
-                <div class="card-body " id=>
-                    <h3>The Total Amount of</h3>
+        
+        <!-- Order Summary Section -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 off_cart">
+                <div class="card-body">
+                    <h3>Order Summary</h3>
                     <ul class="list-group">
-                        <li
-                            class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                            Amount<span>Tk. <span id="amount">{{amount}}</span></span></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                            Amount <span>Tk. <span id="amount">{{amount}}</span></span>
+                        </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                            Shipping<span>Tk. 100.00</span></li>
-                        <li
-                            class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                            Shipping <span>Tk. 100.00</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                             <div>
                                 <strong>Total</strong> <small>(including VAT)</small>
                             </div>
-                            <span><strong>Tk. <strong id="totalamount"> {{totalamount}}</strong></strong></span>
+                            <span><strong>Tk. <span id="totalamount">{{totalamount}}</span></strong></span>
                         </li>
                     </ul>
-                    <div class="d-grid"><a href="{% url 'checkout' %}" class="btn btn-primary">Place Order</a></div>
+                    <div class="d-grid">
+                        <a href="{% url 'checkout' %}" class="btn btn-primary shadow-sm rounded-pill">Place Order</a>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
 {% endblock main-content %}
+
+<style>
+    /* General Cart Styles */
+    .card {
+        border-radius: 12px;
+    }
+
+    /* Title and Price Colors */
+    .text-primary {
+        color: #007bff !important;
+    }
+    .text-success {
+        color: #28a745 !important;
+    }
+    
+    /* Button Styles */
+    .btn-primary {
+        font-weight: 600;
+        background-color: #007bff;
+        border: none;
+        padding: 10px 30px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(45deg, #0056b3, #007bff);
+        box-shadow: 0 8px 16px rgba(0, 123, 255, 0.2);
+        transform: scale(1.05);
+    }
+    
+    .btn-outline-danger {
+        border-color: #dc3545;
+        color: #dc3545;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+    }
+    
+    /* Hover Shadow Effects for Quantity Buttons */
+    .btn-light {
+        transition: all 0.2s ease;
+    }
+    .btn-light:hover {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 576px) {
+        .product-title {
+            font-size: 1.5rem;
+        }
+        .product-price {
+            font-size: 1.25rem;
+        }
+        .offers-list li {
+            font-size: 0.85rem;
+        }
+    }
+</style>
