@@ -36,13 +36,13 @@
 <!-- All Products Section -->
 <div class="container my-5">
     <h2 class="text-center mb-4">All Products</h2>
-    <div class="row">
+    <div class="row gy-4">
         {% for product in all_product %}
-        <div class="col-md-4 mb-4">
-            <div class="product-card">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="product-card shadow-lg">
                 <a href="{% url 'product-detail' product.id %}" class="text-decoration-none">
-                    <img src="{{ product.product_image.url }}" class="img-fluid" alt="{{ product.title }}">
-                    <div class="product-info mt-3">
+                    <img src="{{ product.product_image.url }}" class="img-fluid rounded-top" alt="{{ product.title }}">
+                    <div class="product-info mt-3 px-3 pb-3 text-center">
                         <h5 class="text-dark">{{ product.title }}</h5>
                         <p class="price">Tk. {{ product.discounted_price }}
                             {% if product.selling_price %}
@@ -59,30 +59,63 @@
 {% endblock main-content %}
 
 <style>
-    .product-slider {
-        background: #f8f9fa;
-        padding: 1.5rem 0;
+    /* Banner Slider */
+    .carousel .carousel-inner {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Live Sale Section */
+    .bg-dark {
+        background-color: #343a40 !important;
         border-radius: 8px;
     }
+
+    /* Product Grid */
     .product-card {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        padding: 15px;
-        background-color: #fff;
+        background-color: #ffffff;
         border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .product-card:hover {
         transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
+
+    /* Product Image */
+    .product-card img {
+        transition: transform 0.3s ease;
+        height: 250px;
+        object-fit: cover;
+        width: 100%;
+    }
+    .product-card:hover img {
+        transform: scale(1.1);
+    }
+
+    /* Product Info */
     .product-info {
-        margin-top: 10px;
+        padding: 15px;
+    }
+    .product-info h5 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
     }
     .price {
-        font-size: 1.25rem;
-        font-weight: 600;
+        font-size: 1.2rem;
         color: #28a745;
+        font-weight: 700;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 576px) {
+        .product-card img {
+            height: 200px;
+        }
+        .price {
+            font-size: 1rem;
+        }
     }
 </style>
