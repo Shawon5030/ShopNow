@@ -1,99 +1,109 @@
 {% extends 'Shop/base.html' %}
 {% load static %}
 {% block title %}Product Detail | aiQuest Fashion{% endblock title %}
-{% block main-content %}
 
+{% block main-content %}
 <div class="container my-5">
     <div class="row g-4">
         <!-- Product Image Section -->
-        <div class="col-12 col-md-6 text-center">
-            <div class="product-image-wrapper shadow-lg p-3 rounded-3 bg-light">
-                <img src="{{ product.product_image.url }}" alt="Product Image" class="img-fluid img-thumbnail rounded">
-            </div>
+        <div class="col-12 col-md-6 text-center align-self-center">
+            <img src="{{ product.product_image.url }}" alt="{{ product.title }}" class="img-fluid img-thumbnail shadow-lg rounded" style="max-width: 100%; border-radius: 10px;">
         </div>
 
         <!-- Product Details Section -->
         <div class="col-12 col-md-6">
-            <h2 class="product-title text-primary">{{ product.title }}</h2>
-            <hr class="text-secondary">
-            <p class="product-description text-muted">{{ product.description }}</p>
-
-            <h4 class="text-danger fw-bold">
-                Tk. {{ product.discounted_price }}
-                <small class="text-decoration-line-through text-muted ms-2">
-                    {{ product.selling_price }}
-                </small>
-            </h4>
-
-            <!-- Buttons for Add to Cart and Buy Now -->
-            <div class="button-group my-4">
-                <form action="/add-to-cart" class="d-inline">
-                    <input type="hidden" name="prod_id" value="{{ product.id }}" id="prod_id">
-                    <button type="submit" class="btn btn-success shadow-sm px-4 py-2">Add to Cart</button>
-                </form>
+            <div class="product-details bg-light p-4 shadow-lg rounded" style="background: linear-gradient(135deg, #f0f0f0, #e9ecef);">
+                <h2 class="product-title text-primary">{{ product.title }}</h2>
+                <hr>
                 
-                <a href="{% url 'buy-now' %}" class="btn btn-danger shadow-sm px-4 py-2 ms-3">Buy Now</a>
-            </div>
+                <p class="product-description text-muted">{{ product.description }}</p>
+                <h4 class="product-price text-success">
+                    Tk. {{ product.discounted_price }}
+                    <small class="text-muted text-decoration-line-through ms-2">Tk. {{ product.selling_price }}</small>
+                </h4>
+                
+                <!-- Add to Cart & Buy Now Buttons -->
+                <div class="d-flex align-items-center mt-4">
+                    <form action="/add-to-cart" method="post" class="d-inline me-3">
+                        <input type="hidden" name="prod_id" value="{{ product.id }}">
+                        <button type="submit" class="btn btn-primary shadow px-4 py-2" style="border-radius: 25px;">Add to Cart</button>
+                    </form>
+                    
+                    <a href="{% url 'buy-now' %}" class="btn btn-danger shadow px-4 py-2" style="border-radius: 25px;">Buy Now</a>
+                </div>
 
-            <!-- Available Offers Section -->
-            <div class="offers mt-5">
-                <h5 class="text-secondary">Available Offers</h5>
-                <ul class="offer-list text-dark">
-                    <li><strong>Bkash Offer:</strong> 5% Unlimited Cashback on Payment</li>
-                    <li><strong>Special Price:</strong> Get extra Tk.5000 off (price inclusive of discount)</li>
-                    <li><strong>Partner Offer:</strong> Tk.1000 Gift Card on Every 1000th Transaction with Bkash, Nagad.</li>
+                <!-- Available Offers Section -->
+                <h5 class="mt-5 text-primary">Available Offers</h5>
+                <ul class="offers-list">
+                    <li>Bkash Offer: 5% Unlimited Cashback on Payment</li>
+                    <li>Special Price: Get extra Tk. 5000 off (inclusive of discount)</li>
+                    <li>Partner Offer: Tk. 1000 Gift Card on Every 1000th Transaction with Bkash, Nagad.</li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock main-content %}
 
 <style>
-    /* Custom Colors */
+    /* Product Detail Styles */
+    .product-details {
+        background: linear-gradient(to bottom right, #ffffff, #f9f9f9);
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .product-details:hover {
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    }
+
     .product-title {
         font-size: 1.8rem;
-        color: #4B0082; /* Indigo */
+        font-weight: 700;
+        color: #4B0082;
     }
 
     .product-description {
         font-size: 1rem;
-        color: #555;
+        line-height: 1.6;
+        color: #6c757d;
     }
 
-    .offer-list {
-        padding-left: 20px;
+    .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #28a745;
     }
 
-    /* Product Image Wrapper */
-    .product-image-wrapper {
-        background: linear-gradient(135deg, #ffcccb, #ffe4e1);
-        border-radius: 10px;
+    .offers-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 15px;
     }
-
-    /* Button Styling */
-    .button-group .btn {
-        border-radius: 25px;
-        font-weight: 600;
-        transition: background 0.3s ease;
-    }
-    .btn-success {
-        background-color: #28a745;
-        color: white;
-    }
-    .btn-success:hover {
-        background-color: #218838;
-    }
-
-    /* Offers Section */
-    .offers h5 {
-        color: #6A0DAD; /* Dark Purple */
-        margin-bottom: 15px;
-    }
-    .offers ul li {
-        margin-bottom: 10px;
+    .offers-list li {
         font-size: 0.9rem;
+        color: #343a40;
+        padding: 5px 0;
+    }
+
+    /* Button Styles */
+    .btn-primary, .btn-danger {
+        font-weight: 600;
+        border-radius: 20px;
+        padding: 10px 30px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+        background: #007bff;
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+    }
+    .btn-danger:hover {
+        background: #dc3545;
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
     }
 
     /* Responsive Adjustments */
@@ -101,12 +111,11 @@
         .product-title {
             font-size: 1.5rem;
         }
-        .product-description {
-            font-size: 0.9rem;
+        .product-price {
+            font-size: 1.25rem;
         }
-        .button-group .btn {
-            font-size: 0.9rem;
-            padding: 8px 12px;
+        .offers-list li {
+            font-size: 0.85rem;
         }
     }
 </style>
