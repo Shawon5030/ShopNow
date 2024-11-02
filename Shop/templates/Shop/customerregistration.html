@@ -1,5 +1,6 @@
 {% extends 'Shop/base.html' %}
 {% load static %}
+{% load custom_filters %}
 {% block title %}Customer Registration{% endblock title %}
 {% block main-content %}
 <div class="container">
@@ -8,7 +9,7 @@
             <h3>Customer Registration</h3>
             <hr>
 
-            <form action="{% url 'register' %}" method="post" novalidate class="shadow p-5">
+            <form action="{% url 'profile' %}" method="post" novalidate class="shadow p-5">
                 {% if messages %}
                     {% for message in messages %}
                         <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{ message }}</p>
