@@ -8,7 +8,7 @@
     <div class="carousel-inner">
         {% for i in banners %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{{ i.banner_image.url }}" class="d-block w-100" alt="Banner Image">
+            <img src="{{ i.banner_image.url }}" class="d-block w-100 rounded-3 shadow" alt="Banner Image">
         </div>
         {% endfor %}
     </div>
@@ -25,17 +25,17 @@
 
 {% block livesale %}
 <!-- Live Sale Section -->
-<div class="text-center bg-dark text-light py-4 shadow-lg">
+<div class="text-center bg-dark text-light py-4 shadow-lg rounded-3">
     <h1 class="mb-2">Welcome to aiQuest Fashion</h1>
     <p class="lead">Enjoy a 10% Instant Discount on purchases above 10,000 TK</p>
-    <small>Terms and Conditions Apply. Visit <a href="https://www.aiquest.org/" class="text-light">our website</a> for details.</small>
+    <small>Terms and Conditions Apply. Visit <a href="https://www.aiquest.org/" class="text-light text-decoration-underline">our website</a> for details.</small>
 </div>
 {% endblock livesale %}
 
 {% block main-content %}
 <!-- All Products Section -->
 <div class="container my-5">
-    <h2 class="text-center mb-4">All Products</h2>
+    <h2 class="text-center mb-4" style="color: #4B0082;">Our Featured Products</h2>
     <div class="row gy-4">
         {% for product in all_product %}
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -43,12 +43,13 @@
                 <a href="{% url 'product-detail' product.id %}" class="text-decoration-none">
                     <img src="{{ product.product_image.url }}" class="img-fluid rounded-top" alt="{{ product.title }}">
                     <div class="product-info mt-3 px-3 pb-3 text-center">
-                        <h5 class="text-dark">{{ product.title }}</h5>
-                        <p class="price">Tk. {{ product.discounted_price }}
+                        <h5 class="product-title text-dark">{{ product.title }}</h5>
+                        <p class="price text-success">Tk. {{ product.discounted_price }}
                             {% if product.selling_price %}
                             <span class="text-muted text-decoration-line-through ms-2">Tk. {{ product.selling_price }}</span>
                             {% endif %}
                         </p>
+                        <a href="{% url 'product-detail' product.id %}" class="btn btn-view-details btn btn-primary text-primary">View Details</a>
                     </div>
                 </a>
             </div>
@@ -59,9 +60,9 @@
 {% endblock main-content %}
 
 <style>
-    /* Banner Slider */
+    /* Carousel */
     .carousel .carousel-inner {
-        border-radius: 8px;
+        border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
@@ -71,16 +72,17 @@
         border-radius: 8px;
     }
 
-    /* Product Grid */
+    /* Product Card Styles */
     .product-card {
-        background-color: #ffffff;
-        border-radius: 8px;
+        background-color: #f8f9fa;
+        border-radius: 12px;
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #ddd;
     }
     .product-card:hover {
         transform: scale(1.05);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
     /* Product Image */
@@ -98,15 +100,31 @@
     .product-info {
         padding: 15px;
     }
-    .product-info h5 {
+    .product-title {
         font-size: 1.2rem;
         font-weight: bold;
-        color: #333;
+        color: #4B0082;
+        text-transform: uppercase;
     }
     .price {
         font-size: 1.2rem;
         color: #28a745;
         font-weight: 700;
+    }
+
+    /* View Details Button */
+    .btn-view-details {
+        background-color: #4B0082;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease;
+    }
+    .btn-view-details:hover {
+        background-color: #6A0DAD;
+        color: #fff;
     }
 
     /* Responsive Adjustments */
