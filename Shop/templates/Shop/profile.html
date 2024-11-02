@@ -39,7 +39,7 @@
                 {% endif %}
             </form>
             <div class="col-sm-2  border-end in-small">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled in-small">
                     <li class="d-grid mb-2"><a href="{% url 'profile' %}" class="btn text-primary btn-outline-primary btn btn-primary">Profile</a></li>
                     <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-outline-primary">Address</a></li>
                 </ul>
@@ -94,6 +94,8 @@
         .in-small{
             display: block;
             width: 100%;
+            display: flex;
+            gap: .5em;
         }
         .profile-button-off{
             display: none;
