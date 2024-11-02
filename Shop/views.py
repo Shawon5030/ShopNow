@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import redirect
 from django.db.models import Q
-from .models import Cart, Product
+from .models import Cart, Product , banner
 
 # Create your views here.
 class ProductView(View):
@@ -18,7 +18,8 @@ class ProductView(View):
         gentspants = Product.objects.filter(category = 'GP')
         borkhas = Product.objects.filter(category = 'BK')
         babyfashions = Product.objects.filter(category = 'BF')
-        return render(request, 'Shop/home.html', {'gentspants':gentspants, 'borkhas':borkhas, 'babyfashions': babyfashions})
+        banners = banner.objects.all()
+        return render(request, 'Shop/home.html', {'gentspants':gentspants,'banners':banners, 'borkhas':borkhas, 'babyfashions': babyfashions})
 
 
 

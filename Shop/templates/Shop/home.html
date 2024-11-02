@@ -6,6 +6,7 @@
 <!--Banner Slider-->
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
+    {% for i in banners%}
         <div class="carousel-item active">
             <img src="{% static 'Shop/images/banner/b1.jpg' %}" class="d-block w-100" alt="...">
         </div>
