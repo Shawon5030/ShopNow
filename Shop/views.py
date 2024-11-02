@@ -12,12 +12,19 @@ from django.shortcuts import redirect
 from django.db.models import Q
 from .models import Cart, Product , banner
 
-# Create your views here.
+
+    
+
 class ProductView(View):
     def get(self, request):
         all_product = Product.objects.all()
         banners = banner.objects.all()
-        return render(request, 'Shop/home.html', {'banners':banners, 'all_product':all_product})
+        if request.user.is_authenticated:
+         carts_count = Cart.objects.filter(user=request.user).count()
+         return render(request, 'Shop/home.html', {'banners':banners,'a':carts_count,'all_product':all_product})
+         
+        
+        return render(request, 'Shop/home.html', {'banners':banners,'all_product':all_product})
 
 
 
@@ -117,7 +124,11 @@ def removecart(request):
 class ProductDetailView(View):
   def get(self,request, pk):
     product = Product.objects.get(pk=pk)
+    if request.user.is_authenticated:
+         carts_count = Cart.objects.filter(user=request.user).count()
+         return render(request, 'Shop/productdetail.html', {'a':carts_count,'product': product})
     return render(request, 'Shop/productdetail.html',{'product': product})
+
 
 
 
@@ -133,6 +144,9 @@ def add_to_cart(request):
 @login_required
 def show_cart(request):
    if request.user.is_authenticated:
+           
+      carts_count = Cart.objects.filter(user=request.user).count()
+      
       user = request.user
       cart = Cart.objects.filter(user=user)
       amount = 0.0
@@ -144,7 +158,7 @@ def show_cart(request):
             tempamount = (p.quantity * p.product.discounted_price)
             amount += tempamount  
             totalamount = amount + shipping_amount
-         return render(request, 'Shop/addtocart.html', {'carts':cart, 'totalamount':totalamount,'amount':amount })
+         return render(request, 'Shop/addtocart.html', {'carts':cart,'a':carts_count, 'totalamount':totalamount,'amount':amount })
       else:
          return render(request, 'Shop/emptycart.html')
 
@@ -155,10 +169,12 @@ def buy_now(request):
 class ProfileView(View):
     def get(self, request):
       form = CustomerProfileForm
-      return render(request, 'Shop/profile.html', {'form':form, 'active':'btn-primary'})
+      a = Cart.objects.filter(user=request.user).count()
+      return render(request, 'Shop/profile.html', {'form':form,'a':a, 'active':'btn-primary'})
    
     def post(self, request):
         form = CustomerProfileForm(request.POST)
+        
         if form.is_valid():
             usr = request.user
             name = form.cleaned_data['name']
@@ -169,16 +185,19 @@ class ProfileView(View):
             zipcode = form.cleaned_data['zipcode']
             reg = Customer(user=usr,name=name, division=division,district=district, thana=thana, villorroad=villorroad, zipcode=zipcode)
             reg.save()
+            
+      
             messages.success(request, 'Congratulations! Profile Updated Successfully')
-        return render(request, 'Shop/profile.html', {'form':form, 'active':'btn-primary'})
+        return render(request, 'Shop/profile.html', {'form':form ,'active':'btn-primary'})
 
 @login_required
 def address(request):
  add = Customer.objects.filter(user=request.user)
+ a = Cart.objects.filter(user=request.user).count()
  print(add)
  if  add.exists():
     return render(request, 'Shop/address.html', {'add':add, 'active':'btn-primary' , 'd':"none"})
- return render(request, 'Shop/address.html', {'d':'Block'})
+ return render(request, 'Shop/address.html', {'a':a,'d':'Block'})
 
 @login_required
 def payment(request):
@@ -192,9 +211,10 @@ def payment(request):
 
 def orders(request):
     all_products_user = OrderPlaced.objects.filter(user=request.user)
+    a = Cart.objects.filter(user=request.user).count()
    
     
-    return render(request, 'Shop/orders.html' , {"a":all_products_user})
+    return render(request, 'Shop/orders.html' , {'a':a,"ab":all_products_user})
 
 
 
@@ -218,6 +238,7 @@ class CustomerRegistrationView(View):
   
   def post(self,request):
      form = CustomerRegistrationForm(request.POST)
+     
      if form.is_valid():
         messages.success(request,'Congratulations registration done.')
         form.save()
@@ -228,6 +249,7 @@ def checkout(request):
  if request.user.is_authenticated:
     Customers = Customer.objects.filter(user=request.user)
     Carts = Cart.objects.filter(user=request.user)
+    a = Cart.objects.filter(user=request.user).count()
     
     total_product = [product for product in Cart.objects.filter(user=request.user) ]
     total = 0
@@ -236,7 +258,7 @@ def checkout(request):
     
         
 
-    return render(request, 'Shop/checkout.html', {'c':Customers , "carts":Carts , 'total':total})
+    return render(request, 'Shop/checkout.html', {'c':Customers ,'a':a, "carts":Carts , 'total':total})
 
 from django.http import JsonResponse
 

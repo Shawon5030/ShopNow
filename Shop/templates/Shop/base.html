@@ -26,34 +26,37 @@
 </head>
 
 <body>
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-warning shadow-sm py-3">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/">ShopNow</a>
+        <a class="navbar-brand fw-bold text-dark" href="/">ShopNow</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link text-white fw-semibold" aria-current="page" href="/">Home</a>
+                    <a class="nav-link text-white text-dark fw-bold" aria-current="page" href="/">Home</a>
                 </li>
                
                 
             </ul>
 
-            <form class="d-flex me-3">
-                <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-warning text-white fw-semibold rounded-pill" type="submit">Search</button>
+            <form id="searchForm" class="d-flex align-items-center">
+                <input id="query" type="text" class="form-control me-2 rounded-pill border-primary" placeholder="Search...">
+                <button id="searchButton" class="btn btn-primary fw-semibold rounded-pill px-4" type="submit">
+                    Search
+                </button>
             </form>
+    
 
             <div>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark fw-bold">
                     {% if request.user.is_authenticated %}
                     <li class="nav-item dropdown mx-2">
-                        <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle  text-dark fw-bold fw-semibold" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{request.user.username|capfirst}}
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="profileDropdown">
+                        <ul class="dropdown-menu dropdown-menu-light text-dark fw-bold" aria-labelledby="profileDropdown">
                             <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                             <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
@@ -66,15 +69,15 @@
                     <li class="nav-item mx-2">
                         <a href="{% url 'showcart' %}" class="nav-link text-white position-relative">
                             Cart 
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">10</span>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{a}}</span>
                         </a>
                     </li>
                     {% else %}
                     <li class="nav-item mx-2">
-                        <a href="{% url 'login' %}" class="nav-link text-white fw-semibold">Login</a>
+                        <a href="{% url 'login' %}" class="nav-link text-dark w-bold">Login</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a href="{% url 'customerregistration' %}" class="nav-link text-white fw-semibold">Register</a>
+                        <a href="{% url 'customerregistration' %}" class="nav-link text-dark fw-bold">Register</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -126,13 +129,13 @@
         </div>
 
         <!-- Social Media Links -->
-        <div class="row d-flex justify-content-center mt-4">
+        <div class="row d-flex justify-content-center mt-4 mb-4">
             <div class="col-md-5 col-lg-4 col-xl-3 text-center">
                 <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Follow Us</h5>
-                <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100076803278386" target="_blank" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://github.com/Shawon5030" target="_blank"  class="btn btn-outline-light btn-floating m-1"><i class="fab fa-github"></i></a>
+                <a href="https://www.kaggle.com/mahmudulhaqueshawon" target="_blank"   class="btn btn-outline-light btn-floating m-1"><i class="fab fa-kaggle"></i></a>
+                <a href="https://www.youtube.com/channel/UCtbnZffxwpC-yRDmVlf04LQ" target="_blank"  class="btn btn-outline-light btn-floating m-1"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </div>
@@ -162,3 +165,4 @@
 </body>
 
 </html>
+

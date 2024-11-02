@@ -5,7 +5,7 @@
 {% block banner_slider %}
 <!-- Banner Slider -->
 <div id="carouselExampleControls" class="carousel slide mb-5 shadow" data-bs-ride="carousel">
-    <div class="carousel-inner">
+    <div class="carousel-inner mt-2">
         {% for i in banners %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
             <img src="{{ i.banner_image.url }}" class="d-block w-100 rounded-3 shadow" alt="Banner Image">
@@ -38,7 +38,7 @@
                 <a href="{% url 'product-detail' product.id %}" class="text-decoration-none">
                     <img src="{{ product.product_image.url }}" class="img-fluid rounded-top" alt="{{ product.title }}">
                     <div class="product-info mt-3 px-3 pb-3 text-center">
-                        <h5 class="product-title text-dark">{{ product.title }}</h5>
+                        <h5 class="product-title text-dark">{{ product.title |truncatechars:15 }}</h5>
                         <p class="price text-success">Tk. {{ product.discounted_price }}
                             {% if product.selling_price %}
                             <span class="text-muted text-decoration-line-through ms-2">Tk. {{ product.selling_price }}</span>
