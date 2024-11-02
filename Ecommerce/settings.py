@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q$k_r8n-px5+!n9qxfs_s!g3l5sngxbr-2vsg4g7usurhc5bbh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -120,6 +120,7 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 LOGIN_REDIRECT_URL = '/profile/'
+STATIC_ROOT = 'staticfiles'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
