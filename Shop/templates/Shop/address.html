@@ -3,42 +3,64 @@
 {% block title %}Address{% endblock title %}
 {% block main-content %}
 <div class="container my-5">
+    <h3 class="text-center mb-4">Welcome to aiQuest</h3>
     <div class="row">
-        <h3>Welcome aiQuest</h3>
         <div class="col-sm-2 border-end">
             <ul class="list-unstyled">
-                <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
-                <li class="d-grid"><a href="{% url 'address' %}" class="btn {{active}}">Address</a></li>
+                <li class="d-grid mb-2"><a href="{% url 'profile' %}" class="btn btn-outline-primary">Profile</a></li>
+                <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-outline-primary {{ active }}">Address</a></li>
             </ul>
         </div>
-        <div class="col-sm-9 offset-sm-1 ">
+
+        <div class="col-sm-9 offset-sm-1">
             <div class="row">
-                <div style="display:{{d}}" id="profile-block-address" class=" sha text-center border rounded p-4 shadow">
+                <div style="display:{{ d }}" id="profile-block-address" class="sha text-center border rounded p-4 shadow mb-4">
                     <p class="mb-3 text-success">Please go to your profile and create a new account.</p>
                     <a href="{% url 'profile' %}" class="btn btn-warning">Add New Address</a>
                 </div>
                 
                 {% for ad in add %}
-
-                <div class="col-sm-6">
-                    <div class="card">
+                <div class="col-sm-6 mb-4">
+                    <div class="card shadow-sm">
                         <div class="card-body">
-                            <h3>Address {{forloop.counter}}</h3>
-                            <p>Name: {{ad.name}}</p>
-                            <p>Division: {{ad.division}}</p>
-                            <p>District: {{ad.district}}</p>
-                            <p>Thana: {{ad.thana}}</p>
-                            <p>Vill/Road No: {{ad.villorroad}}</p>
-                    
-                            <p>Zipcode: {{ad.zipcode}}</p>
-                            <a  addressid="{{ad.id}}" class="remove-address btn btn-warning ">Remove</a>
-
+                            <h5 class="card-title">Address {{ forloop.counter }}</h5>
+                            <p><strong>Name:</strong> {{ ad.name }}</p>
+                            <p><strong>Division:</strong> {{ ad.division }}</p>
+                            <p><strong>District:</strong> {{ ad.district }}</p>
+                            <p><strong>Thana:</strong> {{ ad.thana }}</p>
+                            <p><strong>Vill/Road No:</strong> {{ ad.villorroad }}</p>
+                            <p><strong>Zipcode:</strong> {{ ad.zipcode }}</p>
+                            <a href="#" addressid="{{ ad.id }}" class="remove-address btn btn-danger mt-2">Remove</a>
                         </div>
                     </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <p class="text-muted">No addresses available. Please add a new address.</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .btn-outline-primary {
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #007bff; /* Change to your theme color */
+        color: #fff;
+    }
+
+    .btn-danger {
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-danger:hover {
+        background-color: #dc3545; /* Bootstrap danger color */
+        color: #fff;
+    }
+</style>
 {% endblock main-content %}
