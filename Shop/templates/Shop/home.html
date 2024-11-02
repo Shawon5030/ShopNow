@@ -36,23 +36,21 @@
 <!-- All Products Section -->
 <div class="container my-5">
     <h2 class="text-center mb-4" style="color: #4B0082;">Our Featured Products</h2>
-    <div class="row gy-4">
+    <div class="product-grid">
         {% for product in all_product %}
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="product-card shadow-lg">
-                <a href="{% url 'product-detail' product.id %}" class="text-decoration-none">
-                    <img src="{{ product.product_image.url }}" class="img-fluid rounded-top" alt="{{ product.title }}">
-                    <div class="product-info mt-3 px-3 pb-3 text-center">
-                        <h5 class="product-title text-dark">{{ product.title }}</h5>
-                        <p class="price text-success">Tk. {{ product.discounted_price }}
-                            {% if product.selling_price %}
-                            <span class="text-muted text-decoration-line-through ms-2">Tk. {{ product.selling_price }}</span>
-                            {% endif %}
-                        </p>
-                        <a href="{% url 'product-detail' product.id %}" class="btn btn-view-details text-white btn btn-warning">View Details</a>
-                    </div>
-                </a>
-            </div>
+        <div class="product-card">
+            <a href="{% url 'product-detail' product.id %}" class="text-decoration-none">
+                <img src="{{ product.product_image.url }}" class="img-fluid rounded-top" alt="{{ product.title }}">
+                <div class="product-info mt-3 px-3 pb-3 text-center">
+                    <h5 class="product-title text-dark">{{ product.title }}</h5>
+                    <p class="price text-success">Tk. {{ product.discounted_price }}
+                        {% if product.selling_price %}
+                        <span class="text-muted text-decoration-line-through ms-2">Tk. {{ product.selling_price }}</span>
+                        {% endif %}
+                    </p>
+                    <a href="{% url 'product-detail' product.id %}" class="btn btn-view-details text-white">View Details</a>
+                </div>
+            </a>
         </div>
         {% endfor %}
     </div>
@@ -70,6 +68,13 @@
     .live-sale-section {
         background: linear-gradient(45deg, #4B0082, #8A2BE2);
         border-radius: 8px;
+    }
+
+    /* Responsive Product Grid */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
     }
 
     /* Product Card Styles */
@@ -125,15 +130,5 @@
     .btn-view-details:hover {
         background: linear-gradient(45deg, #6A0DAD, #8A2BE2);
         color: #fff;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 576px) {
-        .product-card img {
-            height: 200px;
-        }
-        .price {
-            font-size: 1rem;
-        }
     }
 </style>
