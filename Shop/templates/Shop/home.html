@@ -1,130 +1,130 @@
 {% extends 'Shop/base.html' %}
 {% load static %}
-{% block title %}Home{% endblock title %}
+{% block title %}Home | aiQuest Fashion{% endblock title %}
 
 {% block banner_slider %}
-<!--Banner Slider-->
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+<!-- Banner Slider -->
+<div id="carouselExampleControls" class="carousel slide mb-5" data-bs-ride="carousel">
     <div class="carousel-inner">
-    {% for i in banners%}
-        <div class="carousel-item active">
-            <img src="{{i.banner_image.url}}" class="d-block w-100" alt="...">
+        {% for i in banners %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{{ i.banner_image.url }}" class="d-block w-100" alt="Banner Image">
         </div>
-    {% endfor %}
+        {% endfor %}
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
-    </a>
+    </button>
 </div>
-<!-- End Banner Slider -->
 {% endblock banner_slider %}
 
 {% block livesale %}
 <!-- Live Sale Section -->
-<div class="container">
-    <div class="row text-center p-5 text-white border-bottom shadow" style="background-color: violet;">
-        <h1>Welcome to aiQuest Fashion</h1>
-        <span>10% Instant Discount above 10,000 TK's product buy</span>
-        <small class="fw-lighter">Term and Condition Applied (For details visit 'https://www.aiquest.org/'))</small>
-    </div>
+<div class="text-center bg-dark text-light py-4 shadow-lg">
+    <h1 class="mb-2">Welcome to aiQuest Fashion</h1>
+    <p class="lead">Enjoy a 10% Instant Discount on purchases above 10,000 TK</p>
+    <small>Terms and Conditions Apply. Visit <a href="https://www.aiquest.org/" class="text-light">our website</a> for details.</small>
 </div>
-<!-- End Live Sale Section -->
 {% endblock livesale %}
 
 {% block main-content %}
-<!-- 1st Product Slider -->
-<div class="m-3">
-    <h2>aiQuest | Gents Pant</h2>
-    <!-- Slider 1 -->
-    <div class="owl-carousel" id="slider1">
-        {% for g in gentspants %}
-        <a href="{% url 'product-detail' g.id %}" class="btn">
-            <div class="item"><img src="{{g.product_image.url}}" alt="" height="200px"><span
-                    class="fw-bold">{{g.title}}</span><br><span class="fs-5">{{g.discounted_price}}</span></div>
-        </a>
-        {% endfor %}
-    </div>
-</div>
-<!-- End 1st Product Slider -->
-
-<!-- Payment Info Section -->
-
-<!-- End Payment Info Section -->
-
-<!-- 2nd Product Slider -->
-<div class="mx-3">
-    <h2> Borkha</h2>
-    <!-- Slider 2 -->
-    <div class="owl-carousel" id="slider2">
-        {% for b in borkhas %}
-        <div class="card bg-primary ">
-            <a href="{% url 'product-detail' b.id %}" class="btn">
-                <div class="item"><img src="{{ b.product_image.url }}" alt="" height="200px"><span class="fw-bold"
-                        style="color: white;">{{b.title}}</span><br><span class="fs-5 " style="color: white;">Tk.
-                        {{b.discounted_price}}</span> <span class="fs-5 fw-light text-decoration-line-through"
-                        style="color: red;">
-                        <b>{{b.selling_price}}</b>
-                    </span></div>
-            </a>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-<!-- End 2nd Product Slider -->
-
-<!-- Payment Info Section -->
 <div class="container my-5">
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <img src="{% static 'Shop/images/payavail/cc.jpg' %}" alt="" srcset="" class="img-fluid">
+    <!-- 1st Product Slider: Gents Pant -->
+    <section class="product-slider mb-5">
+        <h2 class="text-center mb-3">Gents Pant</h2>
+        <div class="owl-carousel">
+            {% for g in gentspants %}
+            <a href="{% url 'product-detail' g.id %}" class="product-card">
+                <img src="{{ g.product_image.url }}" class="img-fluid" alt="{{ g.title }}">
+                <div class="product-info">
+                    <h5>{{ g.title }}</h5>
+                    <p class="price">{{ g.discounted_price }}</p>
                 </div>
-            </div>
+            </a>
+            {% endfor %}
         </div>
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <img src="{% static 'Shop/images/payavail/aq.jpg' %}" alt="" srcset="" class="img-fluid">
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <img src="{% static 'Shop/images/payavail/st.jpg' %}" alt="" srcset="" class="img-fluid">
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <img src="{% static 'Shop/images/payavail/dj.jpg' %}" alt="" srcset="" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Payment Info Section -->
+    </section>
 
-<!-- 3rd Product Slider -->
-<div class="m-3">
-    <h2> Baby Fashion</h2>
-    <!-- Slider 3 -->
-    <div class="owl-carousel" id="slider3">
-        {% for bh in babyfashions %}
-        <a href="{% url 'product-detail' bh.id %}" class="btn">
-            <div class="item"><img src="{{bh.product_image.url}}" alt="" height="200px"><span
-                    class="fw-bold">{{bh.title}}</span><br><span class="fs-5">{{bh.discounted_price}}</span></div>
-        </a>
-        {% endfor %}
-        
-    </div>
+    <!-- Payment Info Section -->
+    <section class="payment-info mb-5">
+        <h2 class="text-center mb-4">Payment Methods</h2>
+        <div class="row">
+            {% for image in ['cc.jpg', 'aq.jpg', 'st.jpg', 'dj.jpg'] %}
+            <div class="col-md-3">
+                <div class="card p-3 text-center shadow-sm">
+                    <img src="{% static 'Shop/images/payavail/'|add:image %}" class="img-fluid" alt="Payment Method">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 2nd Product Slider: Borkha -->
+    <section class="product-slider mb-5">
+        <h2 class="text-center mb-3">Borkha</h2>
+        <div class="owl-carousel">
+            {% for b in borkhas %}
+            <a href="{% url 'product-detail' b.id %}" class="product-card bg-dark text-white">
+                <img src="{{ b.product_image.url }}" class="img-fluid" alt="{{ b.title }}">
+                <div class="product-info">
+                    <h5>{{ b.title }}</h5>
+                    <p class="price">Tk. {{ b.discounted_price }}
+                        <span class="text-decoration-line-through text-muted">{{ b.selling_price }}</span>
+                    </p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 3rd Product Slider: Baby Fashion -->
+    <section class="product-slider">
+        <h2 class="text-center mb-3">Baby Fashion</h2>
+        <div class="owl-carousel">
+            {% for bh in babyfashions %}
+            <a href="{% url 'product-detail' bh.id %}" class="product-card">
+                <img src="{{ bh.product_image.url }}" class="img-fluid" alt="{{ bh.title }}">
+                <div class="product-info">
+                    <h5>{{ bh.title }}</h5>
+                    <p class="price">{{ bh.discounted_price }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
 </div>
-<!-- End 3rd Product Slider -->
 {% endblock main-content %}
+
+<style>
+    .product-slider {
+        background: #f8f9fa;
+        padding: 1.5rem 0;
+        border-radius: 8px;
+    }
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+    .product-card:hover {
+        transform: scale(1.05);
+    }
+    .product-info {
+        margin-top: 10px;
+    }
+    .price {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #28a745;
+    }
+</style>
