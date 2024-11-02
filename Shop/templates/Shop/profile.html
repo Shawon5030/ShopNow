@@ -19,7 +19,7 @@
                     {% for fm in form %}
                     <div class="form-group col-lg-6 mb-3"> 
                         {{ fm.label_tag }} 
-                        {{ fm|add_class:"form-control" }} 
+                        {{ fm }} 
                         <small class='text-danger'>{{ fm.errors|striptags }}</small>
                     </div>
                     {% endfor %}
