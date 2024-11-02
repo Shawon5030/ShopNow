@@ -4,8 +4,8 @@
 {% block main-content %}
 <div class="container my-5">
     <h3 class="text-center mb-4">Welcome, <span class="text-capitalize">{{ request.user }}</span></h3>
-    <div class="row profile-button-off">
-        <div class="col-sm-2 border-end">
+    <div class="row">
+        <div class="col-sm-2 border-end  profile-button-off">
             <ul class="list-unstyled">
                 <li class="d-grid mb-2"><a href="{% url 'profile' %}" class="btn text-primary btn-outline-primary btn btn-primary">Profile</a></li>
                 <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-outline-primary">Address</a></li>
@@ -93,6 +93,9 @@
 
         .in-small{
             display: block;
+        }
+        .profile-button-off{
+            display: none;
         }
       }
 </style>
