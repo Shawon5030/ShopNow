@@ -38,6 +38,13 @@
                 </div>
                 {% endif %}
             </form>
+
+            <div class="col-sm-2 border-end in-small">
+                <ul class="list-unstyled">
+                    <li class="d-grid mb-2"><a href="{% url 'profile' %}" class="btn text-primary btn-outline-primary btn btn-primary">Profile</a></li>
+                    <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-outline-primary">Address</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -45,6 +52,9 @@
 <style>
     .btn-outline-primary {
         transition: background-color 0.3s, color 0.3s;
+    }
+    .in-small{
+        display: none;
     }
 
     .btn-outline-primary:hover {
@@ -72,6 +82,10 @@
             position: relative;
             bottom: 0px;
             left: 0px;
+        }
+
+        .in-small{
+            display: block;
         }
       }
 </style>
