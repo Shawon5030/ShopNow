@@ -4,7 +4,7 @@
 
 {% block banner_slider %}
 <!-- Banner Slider -->
-<div id="carouselExampleControls" class="carousel slide mb-5" data-bs-ride="carousel">
+<div id="carouselExampleControls" class="carousel slide mb-5 shadow" data-bs-ride="carousel">
     <div class="carousel-inner">
         {% for i in banners %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -24,8 +24,8 @@
 {% endblock banner_slider %}
 
 {% block livesale %}
-<!-- Live Sale Section -->
-<div class="text-center bg-dark text-light py-4 shadow-lg rounded-3">
+<!-- Live Sale Section with Gradient Background -->
+<div class="text-center text-light py-4 shadow-lg rounded-3 live-sale-section">
     <h1 class="mb-2">Welcome to aiQuest Fashion</h1>
     <p class="lead">Enjoy a 10% Instant Discount on purchases above 10,000 TK</p>
     <small>Terms and Conditions Apply. Visit <a href="https://www.aiquest.org/" class="text-light text-decoration-underline">our website</a> for details.</small>
@@ -49,7 +49,7 @@
                             <span class="text-muted text-decoration-line-through ms-2">Tk. {{ product.selling_price }}</span>
                             {% endif %}
                         </p>
-                        <a href="{% url 'product-detail' product.id %}" class="btn btn-view-details btn btn-primary text-white">View Details</a>
+                        <a href="{% url 'product-detail' product.id %}" class="btn btn-view-details text-white">View Details</a>
                     </div>
                 </a>
             </div>
@@ -66,15 +66,15 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* Live Sale Section */
-    .bg-dark {
-        background-color: #343a40 !important;
+    /* Live Sale Section with Gradient */
+    .live-sale-section {
+        background: linear-gradient(45deg, #4B0082, #8A2BE2);
         border-radius: 8px;
     }
 
     /* Product Card Styles */
     .product-card {
-        background-color: #f8f9fa;
+        background: linear-gradient(to bottom right, #ffffff, #f1f1f1);
         border-radius: 12px;
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -112,9 +112,9 @@
         font-weight: 700;
     }
 
-    /* View Details Button */
+    /* View Details Button with Gradient */
     .btn-view-details {
-        background-color: #4B0082;
+        background: linear-gradient(45deg, #4B0082, #6A0DAD);
         border: none;
         font-size: 0.9rem;
         font-weight: 600;
@@ -123,7 +123,7 @@
         transition: background-color 0.3s ease;
     }
     .btn-view-details:hover {
-        background-color: #6A0DAD;
+        background: linear-gradient(45deg, #6A0DAD, #8A2BE2);
         color: #fff;
     }
 
