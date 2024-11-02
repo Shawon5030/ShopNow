@@ -93,3 +93,5 @@ class OrderPlaced(models.Model):
         }
         return status_progress.get(self.status, 0)
 
+class banner(models.Model):
+   banner_image = models.ImageField(upload_to='bannerimg')

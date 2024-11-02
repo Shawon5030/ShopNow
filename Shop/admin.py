@@ -4,7 +4,8 @@ from .models import (
     Customer,
     Product,
     Cart,
-    OrderPlaced
+    OrderPlaced,
+    banner
 )
 
 # Register your models here.
@@ -24,3 +25,4 @@ class CartModelAdmin(admin.ModelAdmin):
 class OrderPlacedModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'customer','product','quantity','ordered_date','status']
 
+admin.site.register(banner)
