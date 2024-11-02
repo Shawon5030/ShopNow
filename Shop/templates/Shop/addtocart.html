@@ -37,7 +37,7 @@
                                     </a>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a class="remove-cart btn btn-danger text-white" pid="{{cart.product.id}}" style="color: #ffc107;">
+                                    <a class="remove-cart btn btn-dager text-white" pid="{{cart.product.id}}" style="color: #ffc107;">
                                         <i class="fas fa-trash"></i> Remove item
                                     </a>
                                     <p class="mb-0"><span style="color: #28a745; font-weight: bold;">Tk. {{cart.product.discounted_price}}</span></p>
@@ -69,7 +69,7 @@
                         </li>
                     </ul>
                     <div class="d-grid">
-                        <a href="{% url 'checkout' %}" class="btn Place-cart btn-primary" style="background-color: #007bff; border-color: #007bff; color: #fff;">Place Order</a>
+                        <a href="{% url 'checkout' %}" class="btn btn-primary" style="background-color: #007bff; border-color: #007bff; color: #fff;">Place Order</a>
                     </div>
                 </div>
             </div>
@@ -80,18 +80,14 @@
 {% endblock main-content %}
 
 <style>
-    .Place-cart:hover{
-
-    }
-
     /* Custom colorful hover effects */
     .btn:hover {
-        background : transparent
+        opacity: 0.85;
     }
 
     .plus-cart:hover {
         color: #218838 !important;
-        background-color: transparent;
+        background-color: #d4edda;
     }
 
     .minus-cart:hover {
@@ -101,7 +97,7 @@
 
     .remove-cart:hover {
         color: #856404 !important;
-        background-color:transparent;
+        background-color: #fff3cd;
     }
 
     /* Card shadow effect */
