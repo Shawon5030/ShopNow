@@ -15,9 +15,7 @@ from .models import Cart, Product , banner
 # Create your views here.
 class ProductView(View):
     def get(self, request):
-        gentspants = Product.objects.filter(category = 'GP')
-        borkhas = Product.objects.filter(category = 'BK')
-        babyfashions = Product.objects.filter(category = 'BF')
+        
         banners = banner.objects.all()
         return render(request, 'Shop/home.html', {'gentspants':gentspants,'banners':banners, 'borkhas':borkhas, 'babyfashions': babyfashions})
 
