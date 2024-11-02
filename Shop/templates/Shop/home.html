@@ -33,59 +33,7 @@
 {% endblock livesale %}
 
 {% block main-content %}
-<div class="container my-5">
-    <!-- 1st Product Slider: Gents Pant -->
-    <section class="product-slider mb-5">
-        <h2 class="text-center mb-3">Gents Pant</h2>
-        <div class="owl-carousel">
-            {% for g in gentspants %}
-            <a href="{% url 'product-detail' g.id %}" class="product-card">
-                <img src="{{ g.product_image.url }}" class="img-fluid" alt="{{ g.title }}">
-                <div class="product-info">
-                    <h5>{{ g.title }}</h5>
-                    <p class="price">{{ g.discounted_price }}</p>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-    </section>
-
-
-
-    <!-- 2nd Product Slider: Borkha -->
-    <section class="product-slider mb-5">
-        <h2 class="text-center mb-3">Borkha</h2>
-        <div class="owl-carousel">
-            {% for b in borkhas %}
-            <a href="{% url 'product-detail' b.id %}" class="product-card bg-dark text-white">
-                <img src="{{ b.product_image.url }}" class="img-fluid" alt="{{ b.title }}">
-                <div class="product-info">
-                    <h5>{{ b.title }}</h5>
-                    <p class="price">Tk. {{ b.discounted_price }}
-                        <span class="text-decoration-line-through text-muted">{{ b.selling_price }}</span>
-                    </p>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-    </section>
-
-    <!-- 3rd Product Slider: Baby Fashion -->
-    <section class="product-slider">
-        <h2 class="text-center mb-3">Baby Fashion</h2>
-        <div class="owl-carousel">
-            {% for bh in babyfashions %}
-            <a href="{% url 'product-detail' bh.id %}" class="product-card">
-                <img src="{{ bh.product_image.url }}" class="img-fluid" alt="{{ bh.title }}">
-                <div class="product-info">
-                    <h5>{{ bh.title }}</h5>
-                    <p class="price">{{ bh.discounted_price }}</p>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-    </section>
-</div>
+dic</var>
 {% endblock main-content %}
 
 <style>
