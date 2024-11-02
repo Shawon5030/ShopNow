@@ -7,7 +7,7 @@
     <div class="row g-4">
         <!-- Product Image Section -->
         <div class="col-12 col-md-6 text-center align-self-center">
-            <img src="{{ product.product_image.url }}" alt="{{ product.title }}" class="img-fluid img-thumbnail shadow-lg rounded" style="max-width: 100%; border-radius: 10px;">
+            <img src="{{ product.product_image.url }}" alt="{{ product.title }}" class="img-fluid img-thumbnail  rounded" style="max-width: 100%; border-radius: 10px;">
         </div>
 
         <!-- Product Details Section -->
@@ -24,7 +24,7 @@
                 
                 <!-- Add to Cart & Buy Now Buttons -->
                 <div class="d-flex align-items-center mt-4">
-                    <form action="/add-to-cart" method="post" class="d-inline me-3">
+                    <form action="/add-to-cart" method="get" class="d-inline me-3">
                         <input type="hidden" name="prod_id" value="{{ product.id }}">
                         <button type="submit" class="btn btn-primary shadow px-4 py-2" style="border-radius: 25px;">Add to Cart</button>
                     </form>
